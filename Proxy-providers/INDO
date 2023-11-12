@@ -1,0 +1,26 @@
+#akun tunnel
+proxies:
+- name: Biznet grpc🇮🇩
+  server: 104.18.225.52
+  port: 443
+  type: trojan
+  password: vvip-Rendipl1
+  skip-cert-verify: true
+  sni: cdn-mn2tr.jagoan.vip
+  network: grpc
+  grpc-opts:
+    grpc-service-name: trojangrpc
+  udp: true
+- name: Biznet go🇮🇩
+  server: 104.18.225.52
+  port: 443
+  type: trojan
+  password: vvip-Rendipl1
+  skip-cert-verify: true
+  sni: cdn-mn2tr.jagoan.vip
+  network: ws
+  ws-opts:
+    path: /trojan
+    headers:
+      Host: cdn-mn2tr.jagoan.vip
+  udp: true
