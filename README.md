@@ -2,4 +2,4 @@
 
 config openclash rendi_34_🇮🇩
 
-download config @Rendyvpn.yaml
+download config Rendyvpn.yaml
