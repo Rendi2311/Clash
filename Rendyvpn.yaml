@@ -33,29 +33,7 @@ dns:
     - 1.1.1.1
     - 112.215.203.254
 proxies:
-- name: INDO
-  server: 104.18.225.52
-  port: 443
-  type: trojan
-  password: vvip-Rendipl1
-  skip-cert-verify: true
-  sni: id7tr.jagoan.vip
-  network: grpc
-  grpc-opts:
-    grpc-service-name: trojangrpc
-  udp: true
-- name: INDO GO
-  server: 104.18.225.52
-  port: 443
-  type: trojan
-  password: vvip-Rendipl1
-  skip-cert-verify: true
-  sni: id7tr.jagoan.vip
-  network: ws
-  ws-opts:
-    path: /trojan
-    headers:
-      Host: id7tr.jagoan.vip
+
   udp: true
 proxy-groups:
   - name: Selector
