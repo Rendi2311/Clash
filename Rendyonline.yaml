@@ -28,6 +28,8 @@ tun:
 tproxy-port: 7895
 profile:
   store-selected: true
+  store-fakeip: true
+  store-fake-ip: true
 experimental:
   interface-name: en0
 script:
@@ -46,14 +48,15 @@ proxy-groups:
     type: select
     use:
       - Akun
-  - name: MyXL
-    type: select
-    proxies:
-      - DIRECT
   - name: Block18+
     type: select
     proxies:
       - REJECT
+    use:
+      - Akun
+  - name: Shopee🛒
+    type: fallback
+    lazy: true
     use:
       - Akun
   - name: SOSMED
@@ -89,9 +92,10 @@ proxy-groups:
 rules:
  - RULE-SET,Porn,Block18+
  - RULE-SET,nfsw,Block18+
+ - RULE-SET,shopee,Shopee🛒
  - RULE-SET,speedtest,INTERNET
  - SCRIPT,speedtest,INTERNET
- - RULE-SET,myxl,MyXL
+ - RULE-SET,myxl,DIRECT
  - RULE-SET,tiktok,Tiktok🎵
  - SCRIPT,TCPgames,GAME
  - SCRIPT,UDPgames,GAME
@@ -170,4 +174,10 @@ rule-providers:
     behavior: domain
     path: "./speedtest.yaml"
     url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_speedtest.yaml
+    interval: 86400
+  shopee:
+    type: http
+    behavior: domain
+    path: "./shopee.yaml"
+    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Commerce_Shopee_Global.yaml
     interval: 86400
