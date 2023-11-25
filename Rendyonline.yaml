@@ -9,7 +9,6 @@ log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
 bind-address: "*"
-external-ui: "/usr/share/openclash/ui"
 dns:
   enable: true
   ipv6: false
@@ -25,7 +24,6 @@ tun:
   dns-hijack:
   - tcp://8.8.8.8:53
   - tcp://8.8.4.4:53
-tproxy-port: 7895
 profile:
   store-selected: true
   store-fakeip: true
@@ -54,7 +52,7 @@ proxy-groups:
       - REJECT
     use:
       - Akun
-  - name: Shopee🛒
+  - name: Trafic Indo
     type: fallback
     lazy: true
     use:
@@ -92,7 +90,7 @@ proxy-groups:
 rules:
  - RULE-SET,Porn,Block18+
  - RULE-SET,nfsw,Block18+
- - RULE-SET,shopee,Shopee🛒
+ - RULE-SET,rule_indo,Trafic Indo
  - RULE-SET,speedtest,INTERNET
  - SCRIPT,speedtest,INTERNET
  - RULE-SET,myxl,DIRECT
@@ -175,9 +173,9 @@ rule-providers:
     path: "./speedtest.yaml"
     url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_speedtest.yaml
     interval: 86400
-  shopee:
+  rule_indo:
     type: http
     behavior: domain
-    path: "./shopee.yaml"
-    url: https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/Commerce_Shopee_Global.yaml
+    path: "./rule_indo.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_indo.yaml
     interval: 86400
