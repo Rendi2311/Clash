@@ -1,5 +1,5 @@
 #CONFIG SUPPORT PISAH TRAFIK
-#CREATED BY Rendi Kurniawan
+#Rendi Kurniawan
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -9,6 +9,7 @@ log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
 bind-address: "*"
+external-ui: "/usr/share/openclash/ui"
 dns:
   enable: true
   ipv6: false
@@ -24,10 +25,16 @@ tun:
   dns-hijack:
   - tcp://8.8.8.8:53
   - tcp://8.8.4.4:53
+tproxy-port: 7895
 profile:
   store-selected: true
 experimental:
   interface-name: en0
+script:
+  shortcuts:
+    TCPgames: network == 'tcp' and dst_port not in [21, 22, 23, 53, 80, 123, 143, 194, 443, 465, 587, 853, 993, 995, 998, 2052, 2053, 2082, 2083, 2086, 2095, 2096, 5222, 5228, 5229, 5230, 8080, 8443, 8880, 8883, 8888, 8889]
+    UDPgames: network == 'udp' and dst_port not in [21, 22, 23, 53, 80, 123, 143, 194, 443, 465, 587, 853, 993, 995, 998, 2052, 2053, 2082, 2083, 2086, 2095, 2096, 5222, 5228, 5229, 5230, 8080, 8443, 8880, 8883, 8888, 8889]
+    speedtest: network == "tcp" and match_provider("rule_Speedtest")
 proxy-providers:
   Akun:
     type: file
@@ -37,6 +44,16 @@ proxy-providers:
 proxy-groups:
   - name: INTERNET
     type: select
+    use:
+      - Akun
+  - name: MyXL
+    type: select
+    proxies:
+      - DIRECT
+  - name: Block18+
+    type: select
+    proxies:
+      - REJECT
     use:
       - Akun
   - name: SOSMED
@@ -57,12 +74,6 @@ proxy-groups:
       - DIRECT
     use:
       - Akun
-  - name: MyXL
-    type: select
-    proxies:
-      - DIRECT
-    use:
-      - Akun
   - name: Torent⚡
     type: select
     proxies:
@@ -76,9 +87,16 @@ proxy-groups:
     use:
       - Akun
 rules:
+ - RULE-SET,Porn,Block18+
+ - RULE-SET,nfsw,Block18+
+ - RULE-SET,speedtest,INTERNET
+ - SCRIPT,speedtest,INTERNET
  - RULE-SET,myxl,MyXL
  - RULE-SET,tiktok,Tiktok🎵
+ - SCRIPT,TCPgames,GAME
+ - SCRIPT,UDPgames,GAME
  - RULE-SET,Gaming,GAME
+ - RULE-SET,Portgame,GAME
  - RULE-SET,anime-trackers,Torent⚡
  - RULE-SET,Sosmed,SOSMED
  - RULE-SET,Streaming,STREAMING
@@ -101,9 +119,9 @@ rule-providers:
     interval: 86400
   Gaming:
     type: http
-    behavior: classical
-    path: "./Gamemax.yaml"
-    url: https://raw.githubusercontent.com/Yogi-0796/rule_provider/main/ruleGamemax.yaml
+    behavior: domain
+    path: "./Gaming.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_games.yaml
     interval: 86400
   Sosmed:
     type: http
@@ -128,4 +146,28 @@ rule-providers:
     behavior: classical
     path: "./lan.yaml"
     url: https://raw.githubusercontent.com/shiinarimo/Rules-3/main/Clash/Provider/LAN.yaml
+    interval: 86400
+  Portgame:
+    type: http
+    behavior: classical
+    path: "./portgame.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_portgames.yaml
+    interval: 86400
+  Porn:
+    type: http
+    behavior: domain
+    path: "./porn.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_porn.yaml
+    interval: 86400
+  nfsw:
+    type: http
+    behavior: domain
+    path: "./porn.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_nsfw.yaml
+    interval: 86400
+  speedtest:
+    type: http
+    behavior: domain
+    path: "./speedtest.yaml"
+    url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_speedtest.yaml
     interval: 86400
