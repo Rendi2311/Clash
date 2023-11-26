@@ -1,4 +1,4 @@
-#CONFIG SUPPORT PISAH TRAFIK
+#CONFIG SUPPORT PISAH TRAFIK ONLINE
 #Rendi Kurniawan
 port: 7890
 socks-port: 7891
@@ -115,7 +115,7 @@ rule-providers:
     interval: 86400
   myxl:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://raw.githubusercontent.com/helmiau/clashrules/main/rule_provider/ISP_myXL.yaml"
     path: ./MyXL.yaml
     interval: 86400
@@ -164,7 +164,7 @@ rule-providers:
   nfsw:
     type: http
     behavior: domain
-    path: "./porn.yaml"
+    path: "./nfsw.yaml"
     url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_nsfw.yaml
     interval: 86400
   speedtest:
@@ -175,7 +175,7 @@ rule-providers:
     interval: 86400
   rule_indo:
     type: http
-    behavior: domain
+    behavior: classical
     path: "./rule_indo.yaml"
     url: https://raw.githubusercontent.com/malikshi/open_clash/main/rule_provider/rule_indo.yaml
     interval: 86400
